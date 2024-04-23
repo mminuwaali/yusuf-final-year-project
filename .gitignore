@@ -1,0 +1,4 @@
+website/db.sqlite*
+.env/
+static/
+media/

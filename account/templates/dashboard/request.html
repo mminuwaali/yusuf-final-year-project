@@ -1,0 +1,34 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+  <section class="absolute inset-2 bg-white items-start content-start bg-opacity-30 shadow-inner p-2 px-6 overflow-auto grid gap-4 grid-cols-[repeat(auto-fill,minmax(20rem,1fr))]">
+    {% for leave in leaves %}
+      <div class="shadow flex flex-col items-start gap-2 p-2">
+        <div class="w-full flex gap-2">
+          {% if leave.status == 'pending' %}
+            <div class="w-10 aspect-1 flex-none rounded-md bg-slate-300"></div>
+          {% elif leave.status == 'rejected' %}
+            <div class="w-10 aspect-1 flex-none rounded-md bg-red-300"></div>
+          {% else %}
+            <div class="w-10 aspect-1 flex-none rounded-md bg-blue-300"></div>
+          {% endif %}
+
+          {% if leave.status == 'rejected' %}
+            <div class="leading-3 grow flex flex-col items-start gap-1 text-xs text-slate-400">
+              <span class="leading-3">Reason:</span>
+              <p class="w-full text-[0.6rem]">{{ leave.reason }}</p>
+            </div>
+          {% endif %}
+        </div>
+
+        <h2 class="text-slate-600 capitalize text-sm mt-2 font-semibold">{{ leave.title }}</h2>
+        <p class="w-full leading-4 text-sm text-slate-400 border-b pb-2">{{ leave.description }}</p>
+
+        <div class="w-full flex items-center justify-end gap-4 font-bold text-[0.6rem]">
+          <span class="">From: <i class="">{{ leave.from_date }}</i></span>
+          <span class="">To: <i class="">{{ leave.to_date }}</i></span>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}
